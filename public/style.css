@@ -48,6 +48,7 @@ header {
 h1 {
     font-size: 12px;
     color: var(--theme-color);
+    transition: var(--transition-500-ease);
 }
 
 nav {
