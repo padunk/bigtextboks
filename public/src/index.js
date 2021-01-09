@@ -19,7 +19,7 @@
         },
         light: {
             "--theme-bg": "rgb(240, 240, 240)",
-            "--theme-color": "rgb(200, 180, 255);",
+            "--theme-color": "rgb(200, 180, 255)",
             "--theme-color-hover": "rgb(120, 90, 120)",
             "--theme-color-textarea": "rgba(20,20,20, 0.8)",
         },
