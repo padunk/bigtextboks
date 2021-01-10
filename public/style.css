@@ -30,6 +30,7 @@ body {
     min-height: 100vh;
     font-size: 12px;
     transition: var(--transition-500-ease);
+    transition-property: background-color, color;
 }
 
 .container {
