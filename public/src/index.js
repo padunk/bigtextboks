@@ -1,14 +1,12 @@
 "use strict";
 
-import { icons, THEME_COLOR, setTheme } from "./theme.js";
+import { icons, theme, themeLabel, THEME_COLOR, setTheme } from "./theme.js";
 
 (function () {
     var box = document.getElementById("bigtextboks");
     var copyrightYear = document.getElementById("copyright-year");
     var decreateText = document.getElementById("decrease");
     var increateText = document.getElementById("increase");
-    var theme = document.getElementById("theme");
-    var themeLabel = document.getElementById("theme-label");
 
     var FONT_SIZE = window.getComputedStyle(box).fontSize;
     var STEP = 8;
@@ -57,7 +55,8 @@ import { icons, THEME_COLOR, setTheme } from "./theme.js";
     });
 
     window.setTimeout(function () {
-        document.body.style.setProperty("opacity", 1);
+        document.body.style.setProperty("opacity", "1");
+        document.body.style.setProperty("visibility", "visible");
     }, 501);
 
     // window.addEventListener("resize", function (event) {

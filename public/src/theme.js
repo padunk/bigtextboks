@@ -31,12 +31,13 @@ export function setTheme(theme) {
     }
 }
 
-if (window.localStorage.getItem("theme")) {
-    var themeLabel = document.getElementById("theme-label");
+export var themeLabel = document.getElementById("theme-label");
+export var theme = document.getElementById("theme");
+
+(function () {
     // get user prefer theme from local storage
     var userPreferredTheme = window.localStorage.getItem("theme");
-    // Prevent FOUC on first render.
-    document.body.setAttribute("style", "visibility: visible; opacity: 0;");
+
     if (typeof userPreferredTheme === "string") {
         setTheme(THEME_COLOR[userPreferredTheme]);
     } else {
@@ -55,4 +56,4 @@ if (window.localStorage.getItem("theme")) {
         themeLabel.src = icons.sun.src;
         themeLabel.alt = icons.sun.alt;
     }
-}
+})();
