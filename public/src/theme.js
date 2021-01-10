@@ -13,22 +13,46 @@ export var THEME_COLOR = {
     },
 };
 
+export var icons = {
+    sun: {
+        src: "./icons/sun.svg",
+        alt: "sun",
+    },
+    moon: {
+        src: "./icons/moon.svg",
+        alt: "moon",
+    },
+};
+
 export function setTheme(theme) {
     for (var key in theme) {
         let color = theme[key];
-        document.documentElement.style.setProperty(key, color);
+        document.body.style.setProperty(key, color);
     }
 }
 
 if (window.localStorage.getItem("theme")) {
+    var themeLabel = document.getElementById("theme-label");
     // get user prefer theme from local storage
     var userPreferredTheme = window.localStorage.getItem("theme");
     // Prevent FOUC on first render.
-    document.body.setAttribute("style", "opacity: 0; visibility: visible");
+    document.body.setAttribute("style", "visibility: visible; opacity: 0;");
     if (typeof userPreferredTheme === "string") {
         setTheme(THEME_COLOR[userPreferredTheme]);
     } else {
         // if there is no local storage theme yet, set it to default === 'light'
         setTheme(THEME_COLOR["light"]);
+        window.localStorage.setItem("theme", "light");
+        userPreferredTheme = "light";
+    }
+
+    if (userPreferredTheme === "light") {
+        theme.checked = true;
+        themeLabel.src = icons.moon.src;
+        themeLabel.alt = icons.moon.alt;
+    } else {
+        theme.checked = false;
+        themeLabel.src = icons.sun.src;
+        themeLabel.alt = icons.sun.alt;
     }
 }

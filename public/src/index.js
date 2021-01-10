@@ -1,6 +1,6 @@
 "use strict";
 
-import { setTheme } from "./theme.js";
+import { icons, THEME_COLOR, setTheme } from "./theme.js";
 
 (function () {
     var box = document.getElementById("bigtextboks");
@@ -12,45 +12,8 @@ import { setTheme } from "./theme.js";
 
     var FONT_SIZE = window.getComputedStyle(box).fontSize;
     var STEP = 8;
-    var THEME_COLOR = {
-        dark: {
-            "--theme-bg": "rgb(31, 15, 50)",
-            "--theme-color": "rgb(68, 35, 82)",
-            "--theme-color-hover": "rgb(110, 57, 131)",
-            "--theme-color-textarea": "rgba(255, 255, 255, 0.7)",
-        },
-        light: {
-            "--theme-bg": "rgb(240, 240, 240)",
-            "--theme-color": "rgb(200, 180, 255)",
-            "--theme-color-hover": "rgb(120, 90, 120)",
-            "--theme-color-textarea": "rgba(20,20,20, 0.8)",
-        },
-    };
 
-    var icons = {
-        sun: {
-            src: "./icons/sun.svg",
-            alt: "sun",
-        },
-        moon: {
-            src: "./icons/moon.svg",
-            alt: "moon",
-        },
-    };
-
-    if (window.localStorage.getItem("theme")) {
-        var userPreferredTheme = window.localStorage.getItem("theme");
-        if (userPreferredTheme === "light") {
-            theme.checked = true;
-            themeLabel.src = icons.moon.src;
-            themeLabel.alt = icons.moon.alt;
-        } else {
-            theme.checked = false;
-            themeLabel.src = icons.sun.src;
-            themeLabel.alt = icons.sun.alt;
-        }
-    }
-
+    // console info
     var consoleCss = "font-weight: 700; color: orangered; font-size: 20px;";
 
     copyrightYear.textContent = new Date().getFullYear();
@@ -65,6 +28,7 @@ import { setTheme } from "./theme.js";
         "color: skyblue; font-size: 18px"
     );
 
+    // FEAT: FONT SIZE
     decreateText.addEventListener("click", function (event) {
         FONT_SIZE = parseInt(FONT_SIZE, 10) - STEP;
         box.style.fontSize = FONT_SIZE + "px";
@@ -75,6 +39,7 @@ import { setTheme } from "./theme.js";
         box.style.fontSize = FONT_SIZE + "px";
     });
 
+    // FEAT: THEME
     theme.addEventListener("click", function (event) {
         if (this.checked) {
             // LIGHT THEME HERE
@@ -92,7 +57,7 @@ import { setTheme } from "./theme.js";
     });
 
     window.setTimeout(function () {
-        document.body.setAttribute("style", "opacity: 1");
+        document.body.style.setProperty("opacity", 1);
     }, 501);
 
     // window.addEventListener("resize", function (event) {
