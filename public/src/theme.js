@@ -23,19 +23,12 @@ export function setTheme(theme) {
 if (window.localStorage.getItem("theme")) {
     // get user prefer theme from local storage
     var userPreferredTheme = window.localStorage.getItem("theme");
-
+    // Prevent FOUC on first render.
+    document.body.setAttribute("style", "opacity: 0; visibility: visible");
     if (typeof userPreferredTheme === "string") {
         setTheme(THEME_COLOR[userPreferredTheme]);
     } else {
         // if there is no local storage theme yet, set it to default === 'light'
         setTheme(THEME_COLOR["light"]);
     }
-
-    // Prevent FOUC on first render.
-    // since body implement transition: all and with duration of 500ms
-    // we need to set the timeout of 500ms or >
-    document.body.setAttribute("style", "opacity: 0; visibility: visible");
-    window.setTimeout(function () {
-        document.body.setAttribute("style", "opacity: 1");
-    }, 501);
 }

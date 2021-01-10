@@ -91,6 +91,10 @@ import { setTheme } from "./theme.js";
         }
     });
 
+    window.setTimeout(function () {
+        document.body.setAttribute("style", "opacity: 1");
+    }, 501);
+
     // window.addEventListener("resize", function (event) {
     //     box.removeAttribute("style");
     // });
