@@ -29,8 +29,8 @@ body {
     min-width: 100vw;
     min-height: 100vh;
     font-size: 12px;
-    transition: var(--transition-500-ease);
-    transition-property: background-color, color;
+    /* transition: var(--transition-500-ease);
+    transition-property: background-color, color; */
 }
 
 .container {
@@ -49,7 +49,7 @@ header {
 h1 {
     font-size: 12px;
     color: var(--theme-color);
-    transition: var(--transition-500-ease);
+    /* transition: var(--transition-500-ease); */
 }
 
 nav {
@@ -97,7 +97,7 @@ main {
     text-align: center;
     font-family: inherit;
     resize: none;
-    transition: var(--transition-500-ease);
+    /* transition: var(--transition-500-ease); */
 }
 
 #bigtextboks:focus {

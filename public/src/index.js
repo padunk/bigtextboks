@@ -54,10 +54,8 @@ import { icons, theme, themeLabel, THEME_COLOR, setTheme } from "./theme.js";
         }
     });
 
-    window.setTimeout(function () {
-        document.body.style.setProperty("opacity", "1");
-        document.body.style.setProperty("visibility", "visible");
-    }, 501);
+    document.body.style.setProperty("opacity", "1");
+    document.body.style.setProperty("visibility", "visible");
 
     // window.addEventListener("resize", function (event) {
     //     box.removeAttribute("style");
