@@ -34,7 +34,8 @@ if (window.localStorage.getItem("theme")) {
     // Prevent FOUC on first render.
     // since body implement transition: all and with duration of 500ms
     // we need to set the timeout of 500ms or >
+    document.body.setAttribute("style", "opacity: 0; visibility: visible");
     window.setTimeout(function () {
-        document.body.removeAttribute("style");
-    }, 700);
+        document.body.setAttribute("style", "opacity: 1");
+    }, 501);
 }
