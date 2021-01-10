@@ -1,5 +1,7 @@
 "use strict";
 
+import { setTheme } from "./theme.js";
+
 (function () {
     var box = document.getElementById("bigtextboks");
     var copyrightYear = document.getElementById("copyright-year");
@@ -24,6 +26,7 @@
             "--theme-color-textarea": "rgba(20,20,20, 0.8)",
         },
     };
+
     var icons = {
         sun: {
             src: "./icons/sun.svg",
@@ -37,7 +40,6 @@
 
     if (window.localStorage.getItem("theme")) {
         var userPreferredTheme = window.localStorage.getItem("theme");
-        setTheme(THEME_COLOR[userPreferredTheme]);
         if (userPreferredTheme === "light") {
             theme.checked = true;
             themeLabel.src = icons.moon.src;
@@ -49,9 +51,19 @@
         }
     }
 
+    var consoleCss = "font-weight: 700; color: orangered; font-size: 20px;";
+
     copyrightYear.textContent = new Date().getFullYear();
     console.log('Icons made by "https://www.flaticon.com/authors/freepik');
-    console.log("Authors of bigtextbloks is looking for a full-time job!");
+    console.log(
+        "%cAuthors of bigtextbloks is looking for a" + "%c full-time job!",
+        "color: whitesmoke;",
+        consoleCss
+    );
+    console.log(
+        "%cTwitter: https://twitter.com/anakagungcorp",
+        "color: skyblue; font-size: 18px"
+    );
 
     decreateText.addEventListener("click", function (event) {
         FONT_SIZE = parseInt(FONT_SIZE, 10) - STEP;
@@ -79,10 +91,7 @@
         }
     });
 
-    function setTheme(theme) {
-        for (var key in theme) {
-            let color = theme[key];
-            document.documentElement.style.setProperty(key, color);
-        }
-    }
+    // window.addEventListener("resize", function (event) {
+    //     box.removeAttribute("style");
+    // });
 })();
