@@ -1,63 +1,84 @@
 "use strict";
 
-import { icons, theme, themeLabel, THEME_COLOR, setTheme } from "./theme.js";
+import { THEME_COLOR, icons, setTheme, theme, themeLabel } from "./theme.js";
+
+import { generateConsoleText } from "./console.js";
 
 (function () {
-    var box = document.getElementById("bigtextboks");
-    var copyrightYear = document.getElementById("copyright-year");
-    var decreateText = document.getElementById("decrease");
-    var increateText = document.getElementById("increase");
+  const box = document.getElementById("bigtextboks");
+  const decreaseText = document.getElementById("decrease");
+  const increaseText = document.getElementById("increase");
+  const textSansSerif = document.getElementById("text-sans-serif");
+  const textSerif = document.getElementById("text-serif");
+  const setCurrentText = (fontFamily) =>
+    document.documentElement.style.setProperty("--current-text", fontFamily);
 
-    var FONT_SIZE = window.getComputedStyle(box).fontSize;
-    var STEP = 8;
+  const fontSize = window.getComputedStyle(box).fontSize;
+  const STEP = 8;
 
-    // console info
-    var consoleCss = "font-weight: 700; color: orangered; font-size: 20px;";
+  //* FEAT: FONT SIZE
+  decreaseText.addEventListener("click", function (event) {
+    if (fontSize <= 12) {
+      return;
+    }
+    fontSize = parseInt(fontSize, 10) - STEP;
+    box.style.fontSize = fontSize + "px";
+  });
 
-    copyrightYear.textContent = new Date().getFullYear();
-    console.log('Icons made by "https://www.flaticon.com/authors/freepik');
-    console.log(
-        "%cAuthors of bigtextbloks is looking for a" + "%c full-time job!",
-        "color: whitesmoke;",
-        consoleCss
-    );
-    console.log(
-        "%cTwitter: https://twitter.com/anakagungcorp",
-        "color: skyblue; font-size: 18px"
-    );
+  increaseText.addEventListener("click", function (event) {
+    if (fontSize >= 244) {
+      return;
+    }
+    fontSize = parseInt(fontSize, 10) + STEP;
+    box.style.fontSize = fontSize + "px";
+  });
 
-    // FEAT: FONT SIZE
-    decreateText.addEventListener("click", function (event) {
-        FONT_SIZE = parseInt(FONT_SIZE, 10) - STEP;
-        box.style.fontSize = FONT_SIZE + "px";
-    });
+  //* FEAT: FONT FAMILY
+  textSansSerif.addEventListener("click", function (event) {
+    setCurrentText("sans-serif");
+    textSansSerif.style.color = getCSSVariableValue();
+  });
 
-    increateText.addEventListener("click", function (event) {
-        FONT_SIZE = parseInt(FONT_SIZE, 10) + STEP;
-        box.style.fontSize = FONT_SIZE + "px";
-    });
+  textSerif.addEventListener("click", function (event) {
+    setCurrentText("serif");
+  });
 
-    // FEAT: THEME
-    theme.addEventListener("click", function (event) {
-        if (this.checked) {
-            // LIGHT THEME HERE
-            setTheme(THEME_COLOR.light);
-            themeLabel.src = icons.moon.src;
-            themeLabel.alt = icons.moon.alt;
-            window.localStorage.setItem("theme", "light");
-        } else {
-            // DARK THEME HERE
-            setTheme(THEME_COLOR.dark);
-            themeLabel.src = icons.sun.src;
-            themeLabel.alt = icons.sun.alt;
-            window.localStorage.setItem("theme", "dark");
-        }
-    });
+  //* FEAT: THEME
+  theme.addEventListener("click", function (event) {
+    if (this.checked) {
+      setTheme(THEME_COLOR.light);
+      themeLabel.src = icons.moon.src;
+      themeLabel.alt = icons.moon.alt;
+      window.localStorage.setItem("theme", "light");
+    } else {
+      setTheme(THEME_COLOR.dark);
+      themeLabel.src = icons.sun.src;
+      themeLabel.alt = icons.sun.alt;
+      window.localStorage.setItem("theme", "dark");
+    }
+  });
 
-    document.body.style.setProperty("opacity", "1");
-    document.body.style.setProperty("visibility", "visible");
+  document.body.style.setProperty("opacity", "1");
+  document.body.style.setProperty("visibility", "visible");
 
-    // window.addEventListener("resize", function (event) {
-    //     box.removeAttribute("style");
-    // });
+  //* window LOAD and BEFOREUNLOAD
+  window.addEventListener("load", () => {
+    const persistentText = window.localStorage.getItem("persistentText");
+    setTimeout(() => {
+      if (persistentText) {
+        box.value = persistentText;
+      }
+      box.focus();
+    }, 0);
+  });
+
+  window.addEventListener("beforeunload", (event) => {
+    const text = box.value;
+    if (typeof text === "string") {
+      window.localStorage.setItem("persistentText", text);
+    }
+  });
+
+  //* console info
+  generateConsoleText();
 })();
