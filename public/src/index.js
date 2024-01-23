@@ -13,7 +13,7 @@ import { generateConsoleText } from "./console.js";
   const setCurrentText = (fontFamily) =>
     document.documentElement.style.setProperty("--current-text", fontFamily);
 
-  const fontSize = window.getComputedStyle(box).fontSize;
+  let fontSize = window.getComputedStyle(box).fontSize;
   const STEP = 8;
 
   //* FEAT: FONT SIZE
@@ -36,7 +36,6 @@ import { generateConsoleText } from "./console.js";
   //* FEAT: FONT FAMILY
   textSansSerif.addEventListener("click", function (event) {
     setCurrentText("sans-serif");
-    textSansSerif.style.color = getCSSVariableValue();
   });
 
   textSerif.addEventListener("click", function (event) {
